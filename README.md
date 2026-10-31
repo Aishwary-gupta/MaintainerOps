@@ -35,7 +35,21 @@ maintainerops dashboard
 ```
 > Starts a threaded local web server at `http://127.0.0.1:8080` and automatically opens your browser.
 
-### 2. View Terminal Health Scorecard
+### 2. Interactive Terminal Triage (`maintainerops review`)
+
+Step through findings one by one with single-key options to accept, edit, or dismiss findings without touching your mouse:
+
+```bash
+maintainerops review fastapi/fastapi
+# Or review an offline fixture:
+maintainerops review tests/fixtures/enterprise_repo.json
+```
+- **`[A] Accept`**: Accepts finding and confirms draft response.
+- **`[E] Edit`**: Edit polite draft reply directly inline.
+- **`[S] Skip / Dismiss`**: Skips finding and saves dismissal in `.maintainerops_state.json`.
+- **`[Q] Quit`**: Gracefully exits and displays triage session summary.
+
+### 3. View Terminal Health Scorecard
 
 Generate an executive terminal health scorecard with gauges and primary bottlenecks:
 
