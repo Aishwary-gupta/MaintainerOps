@@ -1,0 +1,59 @@
+name: 'MaintainerOps Triage Scanner'
+description: 'Explainable repository triage, bug report completeness checks, and pull request blocker analysis.'
+author: 'MaintainerOps Contributors'
+branding:
+  icon: 'check-circle'
+  color: 'blue'
+
+inputs:
+  repository:
+    description: 'Repository name in owner/repo format (defaults to current repo)'
+    required: false
+    default: ${{ github.repository }}
+  github-token:
+    description: 'GitHub Token for accessing repository issues and PRs'
+    required: false
+    default: ${{ github.token }}
+  output-format:
+    description: 'Output format (markdown, json, both)'
+    required: false
+    default: 'markdown'
+  output-file:
+    description: 'File path to save the generated report'
+    required: false
+    default: 'maintainerops-report.md'
+  publish-summary:
+    description: 'Whether to append the report to the GitHub Step Summary'
+    required: false
+    default: 'true'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install MaintainerOps
+      shell: bash
+      run: |
+        python -m pip install --upgrade pip
+        pip install "${{ github.action_path }}"
+
+    - name: Run MaintainerOps Scan
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+      run: |
+        maintainerops scan ${{ inputs.repository }} \
+          --format ${{ inputs.output-format }} \
+          --output ${{ inputs.output-file }}
+
+    - name: Publish Step Summary
+      if: ${{ inputs.publish-summary == 'true' }}
+      shell: bash
+      run: |
+        if [ -f "${{ inputs.output-file }}" ]; then
+          cat "${{ inputs.output-file }}" >> $GITHUB_STEP_SUMMARY
+        fi

@@ -1,0 +1,94 @@
+{
+  "repository": "maintainerops/sample-repo",
+  "issues": [
+    {
+      "number": 101,
+      "title": "It crashes when I click the button",
+      "body": "It crashes. Fix it please.",
+      "state": "open",
+      "user": { "login": "alice" },
+      "labels": [{ "name": "bug" }],
+      "created_at": "2026-10-10T10:00:00Z",
+      "updated_at": "2026-10-10T10:00:00Z",
+      "html_url": "https://github.com/maintainerops/sample-repo/issues/101",
+      "comments_count": 0,
+      "reactions_count": 0,
+      "is_pull_request": false
+    },
+    {
+      "number": 102,
+      "title": "Database connection timeout during concurrent requests",
+      "body": "When running 100 concurrent workers, connection pool exhausts and raises TimeoutError.\n\n## Steps to reproduce\n1. Spin up 100 threads\n2. Call get_session()\n\nEnvironment: Python 3.12, PostgreSQL 16.",
+      "state": "open",
+      "user": { "login": "bob" },
+      "labels": [{ "name": "bug" }],
+      "created_at": "2026-10-11T12:00:00Z",
+      "updated_at": "2026-10-11T12:00:00Z",
+      "html_url": "https://github.com/maintainerops/sample-repo/issues/102",
+      "comments_count": 12,
+      "reactions_count": 8,
+      "is_pull_request": false
+    },
+    {
+      "number": 103,
+      "title": "TimeoutError in database connection pool under heavy concurrent load",
+      "body": "Connection pool times out when under heavy concurrent load with multiple workers.\n\nSteps to reproduce:\n1. Execute concurrent workload\n2. Observe connection timeout exception\n\nEnvironment: Python 3.12, Postgres.",
+      "state": "open",
+      "user": { "login": "charlie" },
+      "labels": [{ "name": "bug" }],
+      "created_at": "2026-10-12T14:00:00Z",
+      "updated_at": "2026-10-12T14:00:00Z",
+      "html_url": "https://github.com/maintainerops/sample-repo/issues/103",
+      "comments_count": 2,
+      "reactions_count": 1,
+      "is_pull_request": false
+    }
+  ],
+  "pull_requests": [
+    {
+      "number": 201,
+      "title": "feat: optimize database connection pooling",
+      "body": "Implements pre-ping and pool recycle to prevent timeouts.",
+      "state": "open",
+      "user": { "login": "dev_david" },
+      "labels": [{ "name": "enhancement" }],
+      "created_at": "2026-10-13T09:00:00Z",
+      "updated_at": "2026-10-13T09:00:00Z",
+      "html_url": "https://github.com/maintainerops/sample-repo/pull/201",
+      "draft": false,
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "check_runs": [
+        {
+          "id": 901,
+          "name": "Unit Tests (Linux)",
+          "status": "completed",
+          "conclusion": "failure",
+          "html_url": "https://github.com/maintainerops/sample-repo/actions/runs/901"
+        },
+        {
+          "id": 902,
+          "name": "Lint & Typecheck",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/maintainerops/sample-repo/actions/runs/902"
+        }
+      ]
+    },
+    {
+      "number": 202,
+      "title": "fix: update documentation links",
+      "body": "Fix broken hyperlink in README.",
+      "state": "open",
+      "user": { "login": "eve" },
+      "labels": [{ "name": "documentation" }],
+      "created_at": "2026-10-13T10:00:00Z",
+      "updated_at": "2026-10-13T10:00:00Z",
+      "html_url": "https://github.com/maintainerops/sample-repo/pull/202",
+      "draft": false,
+      "mergeable": false,
+      "mergeable_state": "dirty",
+      "check_runs": []
+    }
+  ]
+}

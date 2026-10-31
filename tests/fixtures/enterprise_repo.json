@@ -1,0 +1,146 @@
+{
+  "repository": "maintainerops/enterprise-demo",
+  "issues": [
+    {
+      "number": 101,
+      "title": "Application crashes on startup",
+      "body": "It crashes when I open the app. Please fix ASAP.",
+      "state": "open",
+      "user": { "login": "alice_reporter" },
+      "labels": [{ "name": "bug" }],
+      "created_at": "2026-10-15T08:00:00Z",
+      "updated_at": "2026-10-15T08:00:00Z",
+      "html_url": "https://github.com/maintainerops/enterprise-demo/issues/101",
+      "comments_count": 0,
+      "reactions_count": 1,
+      "is_pull_request": false
+    },
+    {
+      "number": 102,
+      "title": "Critical production outage: database pool timeout under load",
+      "body": "CRITICAL: Our entire production down due to sudden connection timeout under heavy concurrency.\n\n## Steps to reproduce\n1. Launch 100 concurrent workers\n2. Call database pool acquire()\n\nEnvironment: Python 3.12, PostgreSQL 16 on Ubuntu 24.04.",
+      "state": "open",
+      "user": { "login": "sarah_ops" },
+      "labels": [{ "name": "bug" }, { "name": "critical" }, { "name": "p0" }],
+      "created_at": "2026-10-28T09:00:00Z",
+      "updated_at": "2026-10-31T06:00:00Z",
+      "html_url": "https://github.com/maintainerops/enterprise-demo/issues/102",
+      "comments_count": 18,
+      "reactions_count": 14,
+      "is_pull_request": false
+    },
+    {
+      "number": 103,
+      "title": "Database pool timeout under heavy concurrency workload",
+      "body": "Connection pool times out under heavy concurrency when multiple workers request sessions simultaneously.\n\n## Steps to reproduce\n1. Run concurrent query suite\n2. Inspect timeout exception\n\nEnvironment: Python 3.12, PostgreSQL.",
+      "state": "open",
+      "user": { "login": "brian_dev" },
+      "labels": [{ "name": "bug" }],
+      "created_at": "2026-10-29T10:00:00Z",
+      "updated_at": "2026-10-29T10:00:00Z",
+      "html_url": "https://github.com/maintainerops/enterprise-demo/issues/103",
+      "comments_count": 4,
+      "reactions_count": 3,
+      "is_pull_request": false
+    },
+    {
+      "number": 104,
+      "title": "Fix broken hyperlink in installation guide README",
+      "body": "The link pointing to the configuration documentation in README.md line 42 leads to a 404 page.\n\nExpected behavior:\nLink should point to `docs/configuration.md`.\n\nSteps to reproduce:\n1. Click on configuration link in README.md.",
+      "state": "open",
+      "user": { "login": "newbie_coder" },
+      "labels": [{ "name": "documentation" }],
+      "created_at": "2026-10-25T11:00:00Z",
+      "updated_at": "2026-10-25T11:00:00Z",
+      "html_url": "https://github.com/maintainerops/enterprise-demo/issues/104",
+      "comments_count": 1,
+      "reactions_count": 2,
+      "is_pull_request": false
+    },
+    {
+      "number": 105,
+      "title": "Legacy Redis cache backend memory leak investigation",
+      "body": "Old issue regarding memory usage spikes in obsolete v1 cache adapter.",
+      "state": "open",
+      "user": { "login": "ghost_user" },
+      "labels": [{ "name": "enhancement" }],
+      "created_at": "2026-08-01T10:00:00Z",
+      "updated_at": "2026-08-05T10:00:00Z",
+      "html_url": "https://github.com/maintainerops/enterprise-demo/issues/105",
+      "comments_count": 1,
+      "reactions_count": 0,
+      "is_pull_request": false
+    }
+  ],
+  "pull_requests": [
+    {
+      "number": 201,
+      "title": "feat: add automatic retry with exponential backoff for HTTP requests",
+      "body": "Resolves transient network hiccups by introducing jittered backoff.",
+      "state": "open",
+      "user": { "login": "carlos_contrib" },
+      "labels": [{ "name": "enhancement" }],
+      "created_at": "2026-10-27T12:00:00Z",
+      "updated_at": "2026-10-27T12:00:00Z",
+      "html_url": "https://github.com/maintainerops/enterprise-demo/pull/201",
+      "draft": false,
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "check_runs": [
+        {
+          "id": 901,
+          "name": "E2E Integration Test Suite",
+          "status": "completed",
+          "conclusion": "failure",
+          "html_url": "https://github.com/maintainerops/enterprise-demo/actions/runs/901"
+        },
+        {
+          "id": 902,
+          "name": "Security & Dependency Audit",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/maintainerops/enterprise-demo/actions/runs/902"
+        }
+      ]
+    },
+    {
+      "number": 202,
+      "title": "fix: resolve data race in background queue scheduler",
+      "body": "Synchronizes lock acquisition when dequeuing jobs across threads.",
+      "state": "open",
+      "user": { "login": "elena_eng" },
+      "labels": [{ "name": "bug" }],
+      "created_at": "2026-10-20T14:00:00Z",
+      "updated_at": "2026-10-20T14:00:00Z",
+      "html_url": "https://github.com/maintainerops/enterprise-demo/pull/202",
+      "draft": false,
+      "mergeable": false,
+      "mergeable_state": "dirty",
+      "check_runs": []
+    },
+    {
+      "number": 203,
+      "title": "perf: preallocate buffer chunks for streaming response handler",
+      "body": "Reduces allocation overhead during high throughput file streams.",
+      "state": "open",
+      "user": { "login": "marcus_speed" },
+      "labels": [{ "name": "performance" }],
+      "created_at": "2026-10-01T08:00:00Z",
+      "updated_at": "2026-10-05T08:00:00Z",
+      "html_url": "https://github.com/maintainerops/enterprise-demo/pull/203",
+      "draft": false,
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "requested_reviewers": [{ "login": "lead_maintainer" }],
+      "check_runs": [
+        {
+          "id": 903,
+          "name": "Benchmark Checks",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/maintainerops/enterprise-demo/actions/runs/903"
+        }
+      ]
+    }
+  ]
+}

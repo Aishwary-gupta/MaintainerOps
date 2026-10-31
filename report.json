@@ -1,0 +1,152 @@
+{
+  "repository": "maintainerops/sample-repo",
+  "metrics": {
+    "total_issues_analyzed": 3,
+    "total_prs_analyzed": 2,
+    "incomplete_issues_count": 1,
+    "potential_duplicates_count": 0,
+    "blocked_prs_count": 2,
+    "actionable_high_priority_count": 2
+  },
+  "findings": [
+    {
+      "id": "3d1d310d8e91",
+      "item_type": "issue",
+      "item_number": 101,
+      "item_title": "It crashes when I click the button",
+      "item_url": "https://github.com/maintainerops/sample-repo/issues/101",
+      "finding_type": "incomplete_issue",
+      "severity": "medium",
+      "confidence": 0.85,
+      "summary": "Bug report appears incomplete (missing sufficient description (under 50 chars), reproduction steps, environment details).",
+      "evidence": [
+        {
+          "metric_name": "body_length",
+          "observed_value": 26,
+          "threshold_value": 50,
+          "details": "The issue body contains fewer than 50 characters."
+        },
+        {
+          "metric_name": "reproduction_steps",
+          "observed_value": "absent",
+          "threshold_value": "present",
+          "details": "No reproduction steps section or numbered execution steps found."
+        },
+        {
+          "metric_name": "environment_details",
+          "observed_value": "absent",
+          "threshold_value": "present",
+          "details": "No mention of OS, version, or runtime environment."
+        }
+      ],
+      "suggested_action": "Request missing reproduction details from author.",
+      "draft_response": "Hi @alice, thanks for opening this issue! To help us triage and resolve this efficiently, could you please provide: sufficient description (under 50 chars), reproduction steps, environment details? Thank you!"
+    },
+    {
+      "id": "d847223bc3b8",
+      "item_type": "pull_request",
+      "item_number": 201,
+      "item_title": "feat: optimize database connection pooling",
+      "item_url": "https://github.com/maintainerops/sample-repo/pull/201",
+      "finding_type": "ci_failure",
+      "severity": "high",
+      "confidence": 1.0,
+      "summary": "PR #201 has 1 failing CI check(s): Unit Tests (Linux).",
+      "evidence": [
+        {
+          "metric_name": "failing_checks",
+          "observed_value": [
+            "Unit Tests (Linux)"
+          ],
+          "details": "Failed check runs: Unit Tests (Linux)",
+          "threshold_value": null
+        }
+      ],
+      "suggested_action": "Review CI logs or prompt contributor to fix broken tests/lint.",
+      "draft_response": "Hi @dev_david, one or more CI checks (Unit Tests (Linux)) failed on this PR. Please inspect the test logs and push an update."
+    },
+    {
+      "id": "2e6a4866e17f",
+      "item_type": "pull_request",
+      "item_number": 202,
+      "item_title": "fix: update documentation links",
+      "item_url": "https://github.com/maintainerops/sample-repo/pull/202",
+      "finding_type": "merge_conflict",
+      "severity": "high",
+      "confidence": 1.0,
+      "summary": "PR #202 has merge conflicts blocking integration.",
+      "evidence": [
+        {
+          "metric_name": "mergeable_state",
+          "observed_value": "dirty",
+          "details": "Git reports conflicting changes with base branch.",
+          "threshold_value": null
+        }
+      ],
+      "suggested_action": "Request contributor rebase against main branch.",
+      "draft_response": "Hi @eve, this PR currently has merge conflicts with the base branch. Could you please rebase your branch? Thanks!"
+    },
+    {
+      "id": "00e544983e7d",
+      "item_type": "issue",
+      "item_number": 102,
+      "item_title": "Database connection timeout during concurrent requests",
+      "item_url": "https://github.com/maintainerops/sample-repo/issues/102",
+      "finding_type": "high_priority_actionable",
+      "severity": "high",
+      "confidence": 0.9,
+      "summary": "High-priority issue: 8 reactions, 12 comments.",
+      "evidence": [
+        {
+          "metric_name": "priority_score",
+          "observed_value": 100,
+          "threshold_value": 70,
+          "details": "Composite priority score calculated as 100/100."
+        },
+        {
+          "metric_name": "engagement_metrics",
+          "observed_value": {
+            "reactions": 8,
+            "comments": 12
+          },
+          "details": "8 reactions, 12 comments.",
+          "threshold_value": null
+        }
+      ],
+      "suggested_action": "Prioritize maintainer triage and investigation.",
+      "draft_response": null
+    },
+    {
+      "id": "877dbdd74c3e",
+      "item_type": "issue",
+      "item_number": 103,
+      "item_title": "TimeoutError in database connection pool under heavy concurrent load",
+      "item_url": "https://github.com/maintainerops/sample-repo/issues/103",
+      "finding_type": "high_priority_actionable",
+      "severity": "high",
+      "confidence": 0.9,
+      "summary": "High-priority issue: 1 reactions, 2 comments.",
+      "evidence": [
+        {
+          "metric_name": "priority_score",
+          "observed_value": 59,
+          "threshold_value": 70,
+          "details": "Composite priority score calculated as 59/100."
+        },
+        {
+          "metric_name": "engagement_metrics",
+          "observed_value": {
+            "reactions": 1,
+            "comments": 2
+          },
+          "details": "1 reactions, 2 comments.",
+          "threshold_value": null
+        }
+      ],
+      "suggested_action": "Prioritize maintainer triage and investigation.",
+      "draft_response": null
+    }
+  ],
+  "scan_timestamp": "2026-10-14T09:15:33.372455+00:00",
+  "tool_version": "0.1.0"
+}
