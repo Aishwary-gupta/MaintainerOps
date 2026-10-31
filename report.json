@@ -3,44 +3,139 @@
   "metrics": {
     "total_issues_analyzed": 3,
     "total_prs_analyzed": 2,
-    "incomplete_issues_count": 1,
+    "incomplete_issues_count": 3,
     "potential_duplicates_count": 0,
     "blocked_prs_count": 2,
-    "actionable_high_priority_count": 2
+    "stale_items_count": 2,
+    "good_first_issues_count": 0,
+    "sentiment_alerts_count": 0,
+    "actionable_high_priority_count": 2,
+    "health_score": 18,
+    "health_grade": "F"
   },
   "findings": [
     {
-      "id": "3d1d310d8e91",
+      "id": "07444a35a7e8",
       "item_type": "issue",
       "item_number": 101,
       "item_title": "It crashes when I click the button",
       "item_url": "https://github.com/maintainerops/sample-repo/issues/101",
       "finding_type": "incomplete_issue",
       "severity": "medium",
-      "confidence": 0.85,
-      "summary": "Bug report appears incomplete (missing sufficient description (under 50 chars), reproduction steps, environment details).",
+      "confidence": 0.9,
+      "summary": "Bug report fails repository template validation (issues with: Problem Description, Proposed Solution, Steps to Reproduce, Environment Details, Problem or Opportunity).",
       "evidence": [
         {
-          "metric_name": "body_length",
-          "observed_value": 26,
-          "threshold_value": 50,
-          "details": "The issue body contains fewer than 50 characters."
+          "metric_name": "template_missing_field",
+          "observed_value": "Problem Description",
+          "details": "Required template field 'Problem Description' is absent from the report.",
+          "threshold_value": null
         },
         {
-          "metric_name": "reproduction_steps",
-          "observed_value": "absent",
-          "threshold_value": "present",
-          "details": "No reproduction steps section or numbered execution steps found."
+          "metric_name": "template_missing_field",
+          "observed_value": "Steps to Reproduce",
+          "details": "Required template field 'Steps to Reproduce' is absent from the report.",
+          "threshold_value": null
         },
         {
-          "metric_name": "environment_details",
-          "observed_value": "absent",
-          "threshold_value": "present",
-          "details": "No mention of OS, version, or runtime environment."
+          "metric_name": "template_missing_field",
+          "observed_value": "Environment Details",
+          "details": "Required template field 'Environment Details' is absent from the report.",
+          "threshold_value": null
+        },
+        {
+          "metric_name": "template_missing_field",
+          "observed_value": "Problem or Opportunity",
+          "details": "Required template field 'Problem or Opportunity' is absent from the report.",
+          "threshold_value": null
+        },
+        {
+          "metric_name": "template_missing_field",
+          "observed_value": "Proposed Solution",
+          "details": "Required template field 'Proposed Solution' is absent from the report.",
+          "threshold_value": null
         }
       ],
-      "suggested_action": "Request missing reproduction details from author.",
-      "draft_response": "Hi @alice, thanks for opening this issue! To help us triage and resolve this efficiently, could you please provide: sufficient description (under 50 chars), reproduction steps, environment details? Thank you!"
+      "suggested_action": "Request contributor complete missing template fields.",
+      "draft_response": "Hi @alice, thanks for opening this issue! To help the maintainers investigate, could you please complete the required template sections: Problem Description, Proposed Solution, Steps to Reproduce, Environment Details, Problem or Opportunity? Thank you!"
+    },
+    {
+      "id": "527969a2736b",
+      "item_type": "issue",
+      "item_number": 102,
+      "item_title": "Database connection timeout during concurrent requests",
+      "item_url": "https://github.com/maintainerops/sample-repo/issues/102",
+      "finding_type": "incomplete_issue",
+      "severity": "medium",
+      "confidence": 0.9,
+      "summary": "Bug report fails repository template validation (issues with: Problem Description, Environment Details, Proposed Solution, Problem or Opportunity).",
+      "evidence": [
+        {
+          "metric_name": "template_missing_field",
+          "observed_value": "Problem Description",
+          "details": "Required template field 'Problem Description' is absent from the report.",
+          "threshold_value": null
+        },
+        {
+          "metric_name": "template_missing_field",
+          "observed_value": "Environment Details",
+          "details": "Required template field 'Environment Details' is absent from the report.",
+          "threshold_value": null
+        },
+        {
+          "metric_name": "template_missing_field",
+          "observed_value": "Problem or Opportunity",
+          "details": "Required template field 'Problem or Opportunity' is absent from the report.",
+          "threshold_value": null
+        },
+        {
+          "metric_name": "template_missing_field",
+          "observed_value": "Proposed Solution",
+          "details": "Required template field 'Proposed Solution' is absent from the report.",
+          "threshold_value": null
+        }
+      ],
+      "suggested_action": "Request contributor complete missing template fields.",
+      "draft_response": "Hi @bob, thanks for opening this issue! To help the maintainers investigate, could you please complete the required template sections: Problem Description, Environment Details, Proposed Solution, Problem or Opportunity? Thank you!"
+    },
+    {
+      "id": "81c846f3171f",
+      "item_type": "issue",
+      "item_number": 103,
+      "item_title": "TimeoutError in database connection pool under heavy concurrent load",
+      "item_url": "https://github.com/maintainerops/sample-repo/issues/103",
+      "finding_type": "incomplete_issue",
+      "severity": "medium",
+      "confidence": 0.9,
+      "summary": "Bug report fails repository template validation (issues with: Problem Description, Environment Details, Proposed Solution, Problem or Opportunity).",
+      "evidence": [
+        {
+          "metric_name": "template_missing_field",
+          "observed_value": "Problem Description",
+          "details": "Required template field 'Problem Description' is absent from the report.",
+          "threshold_value": null
+        },
+        {
+          "metric_name": "template_missing_field",
+          "observed_value": "Environment Details",
+          "details": "Required template field 'Environment Details' is absent from the report.",
+          "threshold_value": null
+        },
+        {
+          "metric_name": "template_missing_field",
+          "observed_value": "Problem or Opportunity",
+          "details": "Required template field 'Problem or Opportunity' is absent from the report.",
+          "threshold_value": null
+        },
+        {
+          "metric_name": "template_missing_field",
+          "observed_value": "Proposed Solution",
+          "details": "Required template field 'Proposed Solution' is absent from the report.",
+          "threshold_value": null
+        }
+      ],
+      "suggested_action": "Request contributor complete missing template fields.",
+      "draft_response": "Hi @charlie, thanks for opening this issue! To help the maintainers investigate, could you please complete the required template sections: Problem Description, Environment Details, Proposed Solution, Problem or Opportunity? Thank you!"
     },
     {
       "id": "d847223bc3b8",
@@ -145,8 +240,83 @@
       ],
       "suggested_action": "Prioritize maintainer triage and investigation.",
       "draft_response": null
+    },
+    {
+      "id": "69a9224a53ba",
+      "item_type": "pull_request",
+      "item_number": 201,
+      "item_title": "feat: optimize database connection pooling",
+      "item_url": "https://github.com/maintainerops/sample-repo/pull/201",
+      "finding_type": "stale_pr",
+      "severity": "low",
+      "confidence": 0.85,
+      "summary": "PR #201 has been inactive for 18 days (waiting on contributor).",
+      "evidence": [
+        {
+          "metric_name": "inactive_days",
+          "observed_value": 18,
+          "threshold_value": 14,
+          "details": "Last recorded activity was 18 days ago."
+        },
+        {
+          "metric_name": "waiting_on",
+          "observed_value": "contributor",
+          "details": "Currently identified as waiting on contributor.",
+          "threshold_value": null
+        }
+      ],
+      "suggested_action": "Ping contributor for status update or close if abandoned.",
+      "draft_response": "Hi @dev_david, checking in on this PR! It has been inactive for 18 days. Are you still working on this, or is there any blocker we can help resolve? Thanks!"
+    },
+    {
+      "id": "d747108729ad",
+      "item_type": "pull_request",
+      "item_number": 202,
+      "item_title": "fix: update documentation links",
+      "item_url": "https://github.com/maintainerops/sample-repo/pull/202",
+      "finding_type": "stale_pr",
+      "severity": "low",
+      "confidence": 0.85,
+      "summary": "PR #202 has been inactive for 18 days (waiting on contributor).",
+      "evidence": [
+        {
+          "metric_name": "inactive_days",
+          "observed_value": 18,
+          "threshold_value": 14,
+          "details": "Last recorded activity was 18 days ago."
+        },
+        {
+          "metric_name": "waiting_on",
+          "observed_value": "contributor",
+          "details": "Currently identified as waiting on contributor.",
+          "threshold_value": null
+        }
+      ],
+      "suggested_action": "Ping contributor for status update or close if abandoned.",
+      "draft_response": "Hi @eve, checking in on this PR! It has been inactive for 18 days. Are you still working on this, or is there any blocker we can help resolve? Thanks!"
     }
   ],
-  "scan_timestamp": "2026-10-14T09:15:33.372455+00:00",
-  "tool_version": "0.1.0"
+  "health_summary": {
+    "status": "computed",
+    "composite_score": 18,
+    "grade": "F",
+    "triage_burden": "Critical",
+    "primary_bottleneck": "2 PR(s) blocked by failing CI or merge conflicts",
+    "all_bottlenecks": [
+      "2 PR(s) blocked by failing CI or merge conflicts",
+      "3 incomplete bug report(s)",
+      "2 dormant or stale item(s)"
+    ],
+    "issue_quality_score": 0,
+    "pr_pipeline_score": 0,
+    "backlog_freshness_score": 60,
+    "breakdown": {
+      "incomplete_issues": 3,
+      "blocked_prs": 2,
+      "stale_items": 2,
+      "critical_sentiments": 0
+    }
+  },
+  "scan_timestamp": "2026-10-31T12:19:50.243343+00:00",
+  "tool_version": "0.2.0"
 }

@@ -24,6 +24,7 @@ from maintainerops.models.findings import FindingType
 from maintainerops.reporters.html_report import render_html
 from maintainerops.reporters.json_report import render_json
 from maintainerops.reporters.markdown import render_markdown
+from maintainerops.review import run_interactive_review
 from maintainerops.server.app import start_server
 
 app = typer.Typer(
@@ -65,13 +66,18 @@ def scan(
         "-c",
         help="Path to custom .maintainerops.yml configuration.",
     ),
+    ai: bool = typer.Option(
+        False,
+        "--ai",
+        help="Enable optional semantic AI tone refinement.",
+    ),
 ):
     """Scan a repository or offline fixture and generate an explainable triage report."""
     cfg = load_config(config_file)
     err_console.print(f"[bold cyan]Scanning target:[/bold cyan] {target}")
 
     try:
-        report = run_scan(target, cfg)
+        report = run_scan(target, cfg, use_ai=ai)
     except Exception as e:
         err_console.print(f"[bold red]Scan error:[/bold red] {e}")
         raise typer.Exit(code=1)
@@ -94,6 +100,39 @@ def scan(
             print(rendered)
         else:
             console.print(rendered)
+
+
+@app.command()
+def review(
+    target: str = typer.Argument(
+        ...,
+        help="GitHub repository ('owner/repo') or local JSON fixture path.",
+    ),
+    all: bool = typer.Option(
+        False,
+        "--all",
+        "-a",
+        help="Include previously dismissed findings in the review queue.",
+    ),
+    ai: bool = typer.Option(
+        False,
+        "--ai",
+        help="Enable optional semantic AI tone refinement.",
+    ),
+    config_file: Optional[str] = typer.Option(
+        None,
+        "--config",
+        "-c",
+        help="Path to custom .maintainerops.yml configuration.",
+    ),
+):
+    """Step through triage findings one-by-one in an interactive keyboard-driven terminal loop."""
+    cfg = load_config(config_file)
+    try:
+        run_interactive_review(target=target, config=cfg, show_all=all, use_ai=ai)
+    except Exception as e:
+        err_console.print(f"[bold red]Review session error:[/bold red] {e}")
+        raise typer.Exit(code=1)
 
 
 @app.command()

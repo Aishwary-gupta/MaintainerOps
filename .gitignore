@@ -40,3 +40,9 @@ Thumbs.db
 reports/
 *.report.json
 *.report.md
+report.json
+*.html
+!src/maintainerops/server/static/*.html
+.maintainerops_state.json
+.maintainerops/
+

@@ -1,9 +1,10 @@
-import re
 import hashlib
-from typing import List
+import re
+from typing import List, Optional
 from maintainerops.models.findings import Evidence, Finding, FindingType, Severity
 from maintainerops.models.github import IssueItem, PullRequestItem
 from maintainerops.rules.base import BaseRule
+from maintainerops.templates import IssueTemplate, validate_issue_against_template
 
 
 def _get_user_login(user) -> str:
@@ -15,7 +16,10 @@ def _get_user_login(user) -> str:
 
 
 class CompletenessRule(BaseRule):
-    """Detects incomplete bug reports lacking reproduction steps, environment, or logs."""
+    """Detects incomplete bug reports lacking reproduction steps, environment, or failing repository issue templates."""
+
+    def __init__(self, templates: Optional[List[IssueTemplate]] = None):
+        self.templates = templates or []
 
     @property
     def name(self) -> str:
@@ -31,6 +35,54 @@ class CompletenessRule(BaseRule):
                 continue
 
             body = (issue.body or "").strip()
+            login = _get_user_login(issue.user)
+
+            # Template-Aware Validation
+            if self.templates:
+                template_violations = []
+                for tmpl in self.templates:
+                    violations = validate_issue_against_template(issue.title, body, tmpl)
+                    if violations:
+                        template_violations.extend(violations)
+
+                if template_violations:
+                    fid = hashlib.sha256(f"template_{issue.number}".encode()).hexdigest()[:12]
+                    evidences = [
+                        Evidence(
+                            metric_name=f"template_{v.issue_type}",
+                            observed_value=v.field_label,
+                            details=v.details,
+                        )
+                        for v in template_violations
+                    ]
+
+                    missing_labels = list({v.field_label for v in template_violations})
+                    summary = f"Bug report fails repository template validation (issues with: {', '.join(missing_labels)})."
+                    draft = (
+                        f"Hi @{login}, thanks for opening this issue! To help the maintainers investigate, "
+                        f"could you please complete the required template sections: {', '.join(missing_labels)}? "
+                        f"Thank you!"
+                    )
+
+                    findings.append(
+                        Finding(
+                            id=fid,
+                            item_type="issue",
+                            item_number=issue.number,
+                            item_title=issue.title,
+                            item_url=issue.html_url,
+                            finding_type=FindingType.INCOMPLETE_ISSUE,
+                            severity=Severity.MEDIUM,
+                            confidence=0.9,
+                            summary=summary,
+                            evidence=evidences,
+                            suggested_action="Request contributor complete missing template fields.",
+                            draft_response=draft,
+                        )
+                    )
+                    continue
+
+            # Standard Heuristic Fallback Validation
             missing_elements = []
             evidences = []
 
@@ -92,7 +144,6 @@ class CompletenessRule(BaseRule):
                 ).hexdigest()[:12]
 
                 missing_str = ", ".join(missing_elements)
-                login = _get_user_login(issue.user)
                 draft = (
                     f"Hi @{login}, thanks for opening this issue! "
                     f"To help us triage and resolve this efficiently, could you please provide: "

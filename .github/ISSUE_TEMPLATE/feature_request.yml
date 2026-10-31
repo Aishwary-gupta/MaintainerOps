@@ -1,0 +1,22 @@
+name: "🚀 Feature Request"
+description: "Suggest a new explainable rule or triage capability for MaintainerOps"
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We welcome community proposals! MaintainerOps emphasizes deterministic, zero-token, explainable triage heuristics.
+  - type: textarea
+    id: problem_statement
+    attributes:
+      label: "Problem or Opportunity"
+      description: "What maintenance bottleneck or challenge are you experiencing?"
+    validations:
+      required: true
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: "Proposed Solution"
+      description: "Describe the rule, metric, or user workflow you would like to see."
+    validations:
+      required: true

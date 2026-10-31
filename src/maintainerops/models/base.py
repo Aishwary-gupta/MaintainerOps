@@ -1,5 +1,6 @@
 """Lightweight compatibility layer for BaseModel supporting both Pydantic and Pure-Python dataclasses."""
 
+import copy
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, get_args, get_origin
 
@@ -40,7 +41,7 @@ else:
 
             for key, default in self.__class__.__dict__.items():
                 if not key.startswith("_") and key not in data and not callable(default):
-                    setattr(self, key, default)
+                    setattr(self, key, copy.deepcopy(default))
 
         def model_dump(self, mode: str = "python") -> Dict[str, Any]:
             result = {}

@@ -1,0 +1,29 @@
+name: "MaintainerOps Scheduled Triage"
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 8 * * 1' # Runs every Monday at 08:00 UTC
+
+jobs:
+  triage:
+    name: "MaintainerOps Repository Triage"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: read
+      pull-requests: read
+      checks: read
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run MaintainerOps Triage Action
+        uses: ./
+        with:
+          repository: ${{ github.repository }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          output-format: 'markdown'
+          output-file: 'triage-report.md'
+          publish-summary: 'true'

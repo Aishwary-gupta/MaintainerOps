@@ -1,0 +1,35 @@
+name: "🐛 Bug Report"
+description: "File an explainable bug report with reproduction steps"
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve MaintainerOps! Please provide sufficient details so maintainers can reproduce and resolve this.
+  - type: textarea
+    id: description
+    attributes:
+      label: "Problem Description"
+      description: "A clear and concise description of the bug."
+      placeholder: "When running maintainerops scan, ..."
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction_steps
+    attributes:
+      label: "Steps to Reproduce"
+      description: "Step-by-step instructions to reproduce the issue."
+      placeholder: |
+        1. Run 'maintainerops scan ...'
+        2. Inspect output
+        3. Observe error
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: "Environment Details"
+      description: "Python version, OS, MaintainerOps version."
+      placeholder: "Python 3.12, Windows 11, MaintainerOps v0.2.0"
+    validations:
+      required: true
